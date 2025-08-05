@@ -2,7 +2,6 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import iconError from '/public/icons/error.svg';
 
 let userSelectedDate;
 let totalRemainingTime;
@@ -22,7 +21,8 @@ const options = {
   onClose(selectedDates) {
     userSelectedDate = new Date(selectedDates[0]);
 
-    if (userSelectedDate < new Date()) {
+  
+    if (userSelectedDate <= new Date()) {
       startButtonEl.classList.remove('active');
       startButtonEl.classList.add('disable');
       iziToast.error({
@@ -33,7 +33,7 @@ const options = {
         backgroundColor: '#ef4040',
         messageColor: '#ffffff',
         titleColor: '#ffffff',
-        iconUrl: iconError,
+        iconUrl: '/icons/error.svg', 
       });
     } else {
       startButtonEl.classList.remove('disable');
@@ -42,12 +42,10 @@ const options = {
   },
 };
 
-flatpickr('input#datetime-picker', options);
+flatpickr(dateInputEl, options);
 
 startButtonEl.addEventListener('click', () => {
-  if (!userSelectedDate) {
-    return;
-  }
+  if (!userSelectedDate) return;
 
   startButtonEl.classList.remove('active');
   startButtonEl.classList.add('disable');
@@ -77,7 +75,6 @@ function updateTimer(ms) {
 }
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;

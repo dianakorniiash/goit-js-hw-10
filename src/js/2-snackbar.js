@@ -1,7 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import iconError from '/public/icons/error.svg';
-import iconSuccess from '/public/icons/success.svg';
+import iconError from '/icons/error.svg';
+import iconSuccess from '/icons/success.svg';
 
 const formEl = document.querySelector('.form');
 
